@@ -16,9 +16,14 @@ public class EchoMobileIntegrations {
         request.setEndpoint('callout:EchoMobileBaseUrl/api/clients/lookup');
         request.setMethod('POST');
         request.setBody(data);
-        HttpResponse response = http.send(request);
-        system.debug(request.getHeader('account-id'));
-        System.debug(response.getBody());
+        try {
+            HttpResponse response = http.send(request);
+            system.debug(request.getHeader('account-id'));
+            System.debug(response.getBody());
+        } catch (CalloutException e) {
+            System.debug('Callout error '+ e);
+            
+        }
     }
 
     public static void GetAccountDetails() {
